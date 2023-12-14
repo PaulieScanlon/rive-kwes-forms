@@ -1,0 +1,118 @@
+<script>
+  const r = new rive.Rive({
+    src: '/rive/2244-7248-animated-login-character.riv',
+    canvas: document.getElementById('canvas'),
+    autoplay: true,
+    stateMachines: 'Login Machine',
+    // onLoad: () => {
+    // r.stateMachineInputs('Login Machine').forEach((input) => {
+    // const { name, type } = input;
+    // console.log('input: ', name, type);
+    // console.log(input);
+    // });
+    // },
+  });
+  const jsConfetti = new JSConfetti();
+
+  const getTrigger = (name) => {
+    return r.stateMachineInputs('Login Machine').find((input) => input.name === name);
+  };
+
+  const form = document.getElementById('riveForm');
+
+  form.addEventListener('kwSubmitted', function () {
+    const trigger = getTrigger('trigSuccess');
+    trigger.fire();
+    jsConfetti.addConfetti();
+  });
+
+  form.addEventListener('kwHasErrors', () => {
+    const trigger = getTrigger('trigFail');
+    trigger.fire();
+  });
+
+  const name = document.getElementById('riveFormName');
+
+  name.addEventListener('focus', () => {
+    const trigger = getTrigger('isChecking');
+    trigger.value = true;
+  });
+
+  name.addEventListener('blur', () => {
+    const trigger = getTrigger('isChecking');
+    trigger.value = false;
+  });
+
+  const email = document.getElementById('riveFormEmail');
+
+  email.addEventListener('focus', () => {
+    const trigger = getTrigger('isHandsUp');
+    trigger.value = true;
+  });
+
+  email.addEventListener('blur', () => {
+    const trigger = getTrigger('isHandsUp');
+    trigger.value = false;
+  });
+
+  const message = document.getElementById('riveFormMessage');
+
+  message.addEventListener('focus', () => {
+    const trigger = getTrigger('isChecking');
+    trigger.value = true;
+  });
+
+  message.addEventListener('blur', () => {
+    const trigger = getTrigger('isChecking');
+    trigger.value = false;
+  });
+
+  // name.addEventListener('input', (event) => {
+  //   // console.log('message change: ', event);
+  //   const { value } = event.target;
+  //   const trigger = r.stateMachineInputs('Login Machine').find((input) => input.name === 'numLook');
+  //   trigger.value = value.length * 5;
+  // });
+</script>
+<script is:inline src='https://unpkg.com/@rive-app/canvas@2.7.0'></script>
+<script is:inline src='https://kwesforms.com/v2/kwes-script.js' defer></script>
+<script is:inline src='https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js'></script>
+<section class='mx-auto max-w-xl'>
+  <canvas id='canvas' width='800' height='600' class='w-full -mt-12'></canvas>
+  <div class='flex flex-col gap-8 bg-white p-8 border-4 border-custom-ice-1 rounded-lg shadow-xl'>
+    <div>
+      <h2 class='text-center mt-4 mb-2 text-custom-claret-5 text-5xl font-black'>Contact Us</h2>
+      <p class='text-center mt-0 mb-2 text-custom-claret-4'>Drop us a little message and we'll get back to you soon.</p>
+    </div>
+    <form
+      id='riveForm'
+      class='kwes-form flex flex-col gap-6'
+      action='https://kwesforms.com/api/foreign/forms/bH6j6B8sEescy2Lc3Hku'
+      data-kw-no-reload
+    >
+      <div class='flex gap-4'>
+        <div class='grow'>
+          <label for='name'>Name</label>
+          <input id='riveFormName' type='text' name='name' data-kw-rules='required' />
+        </div>
+        <div class='grow'>
+          <label for='email'>Email</label>
+          <input id='riveFormEmail' type='email' name='email' data-kw-rules='required|email' required />
+        </div>
+      </div>
+      <div>
+        <label for='name'>Message</label>
+        <textarea id='riveFormMessage' name='message' rows='4' data-kw-rules='required'></textarea>
+      </div>
+      <button type='submit'> Send Message</button>
+    </form>
+    <small class='block text-center text-sm text-custom-ice-5'
+      >Powered by <a
+        href='https://kwesforms.com/'
+        target='_blank'
+        rel='noopener'
+        class='text-inherit hover:text-custom-claret-1 transition-all duration-300'>kwesforms.com</a
+      ></small
+    >
+  </div>
+</section>

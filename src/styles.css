@@ -1,0 +1,27 @@
+.kwes-form .kw-alert.kw-alert-error,
+.kwes-form .kw-alert.kw-alert-success {
+  @apply hidden;
+}
+
+.kwes-form label {
+  @apply block font-bold text-sm mb-1;
+}
+
+.kwes-form input,
+.kwes-form textarea {
+  @apply border-2 border-custom-ice-2 p-2 rounded w-full;
+}
+
+.kwes-form input.kw-border-error,
+.kwes-form textarea.kw-border-error {
+  @apply border-2;
+}
+
+.kwes-form input.kw-border-success,
+.kwes-form textarea.kw-border-success {
+  @apply border-2;
+}
+
+.kwes-form button {
+  @apply bg-custom-claret-2 text-white font-medium px-6 py-2 h-12 rounded enabled:hover:brightness-125 transition-all duration-300;
+}
