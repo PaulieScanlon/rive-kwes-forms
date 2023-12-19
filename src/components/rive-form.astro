@@ -4,15 +4,7 @@
     canvas: document.getElementById('canvas'),
     autoplay: true,
     stateMachines: 'Login Machine',
-    // onLoad: () => {
-    // r.stateMachineInputs('Login Machine').forEach((input) => {
-    // const { name, type } = input;
-    // console.log('input: ', name, type);
-    // console.log(input);
-    // });
-    // },
   });
-  const jsConfetti = new JSConfetti();
 
   const getTrigger = (name) => {
     return r.stateMachineInputs('Login Machine').find((input) => input.name === name);
@@ -23,7 +15,6 @@
   form.addEventListener('kwSubmitted', function () {
     const trigger = getTrigger('trigSuccess');
     trigger.fire();
-    jsConfetti.addConfetti();
   });
 
   form.addEventListener('kwHasErrors', () => {
@@ -66,17 +57,9 @@
     const trigger = getTrigger('isChecking');
     trigger.value = false;
   });
-
-  // name.addEventListener('input', (event) => {
-  //   // console.log('message change: ', event);
-  //   const { value } = event.target;
-  //   const trigger = r.stateMachineInputs('Login Machine').find((input) => input.name === 'numLook');
-  //   trigger.value = value.length * 5;
-  // });
 </script>
-<script is:inline src='https://unpkg.com/@rive-app/canvas@2.7.0'></script>
 <script is:inline src='https://kwesforms.com/v2/kwes-script.js' defer></script>
-<script is:inline src='https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js'></script>
+<script is:inline src='https://unpkg.com/@rive-app/canvas@2.7.0'></script>
 <section class='mx-auto max-w-xl'>
   <canvas id='canvas' width='800' height='600' class='w-full -mt-12'></canvas>
   <div class='flex flex-col gap-8 bg-white p-8 border-4 border-custom-ice-1 rounded-lg shadow-xl'>
